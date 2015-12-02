@@ -1,0 +1,11 @@
+
+* required libraries
+
+3rd party:
+
+- curl
+- boost 1.53
+
+own:
+
+- utils (HTTPDownloader)
