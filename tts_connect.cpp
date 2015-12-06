@@ -19,18 +19,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2878 $ $Date:: 2015-12-02 #$ $Author: serge $
+// $Revision: 2907 $ $Date:: 2015-12-06 #$ $Author: serge $
 
 
 #include "tts_connect.h"                // self
 
 #include "gspeak_wrap.h"                // GSpeakWrap
+#include "espeak_wrap.h"                // ESpeakWrap
 
 using namespace tts_connect;
 
 TtsConnect::TtsConnect()
 {
     engines_["gspeak"]  = new GSpeakWrap;
+    engines_["espeak"]  = new ESpeakWrap;
 }
 
 TtsConnect::~TtsConnect()

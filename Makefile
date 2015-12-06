@@ -26,7 +26,7 @@ BOOST_LIB_NAMES :=
 BOOST_LIBS = $(patsubst %,$(BOOST_LIB_PATH)/lib%.a,$(BOOST_LIB_NAMES))
 
 
-EXT_LIBS=-lcurl $(BOOST_LIBS)
+EXT_LIBS=-lcurl -lportaudio -lespeak $(BOOST_LIBS)
 
 ###################################################################
 
@@ -79,10 +79,10 @@ EXE=
 
 #vpath %.cpp .
 
-SRCC = tts_connect.cpp gspeak_wrap.cpp
+SRCC = tts_connect.cpp gspeak_wrap.cpp espeak_wrap.cpp
 OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCC))
 
-LIB_NAMES = gspeak utils
+LIB_NAMES = espeak_cpp wave gspeak utils
 LIBS = $(patsubst %,$(BINDIR)/lib%.a,$(LIB_NAMES))
 
 all: static
@@ -118,6 +118,18 @@ $(BINDIR)/lib%.a: %		# somehow this rule doesn't work
 $(BINDIR)/libutils.a:
 	cd ../utils; make; cd $(project)
 	ln -sf ../../utils/$@ $(BINDIR)
+
+$(BINDIR)/libwave.a:
+	cd ../wave; make; cd $(project)
+	ln -sf ../../wave/$@ $(BINDIR)
+
+$(BINDIR)/libgspeak.a:
+	cd ../gspeak; make; cd $(project)
+	ln -sf ../../gspeak/$@ $(BINDIR)
+
+$(BINDIR)/libespeak_cpp.a:
+	cd ../espeak_cpp; make; cd $(project)
+	ln -sf ../../espeak_cpp/$@ $(BINDIR)
 
 $(BINDIR):
 	@ mkdir -p $(OBJDIR)

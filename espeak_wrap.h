@@ -1,6 +1,6 @@
 /*
 
-Simple Text to Speech interface
+Wrapper over ESpeak
 
 Copyright (C) 2015 Sergey Kolevatov
 
@@ -19,31 +19,39 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2900 $ $Date:: 2015-12-06 #$ $Author: serge $
+// $Revision: 2901 $ $Date:: 2015-12-06 #$ $Author: serge $
 
+#ifndef TTS_CONNECT_ESPEAK_WRAP_H
+#define TTS_CONNECT_ESPEAK_WRAP_H
 
-#ifndef TTS_CONNECT_I_TEXT_TO_SPEECH_H
-#define TTS_CONNECT_I_TEXT_TO_SPEECH_H
+#include "i_text_to_speech.h"   // ITextToSpeech
 
-#include <string>               // std::string
+#include "../espeak_cpp/espeak_cpp.h"   // ESpeakCpp
 
 namespace tts_connect
 {
 
-class ITextToSpeech
+class ESpeakWrap: public ITextToSpeech
 {
 public:
-    virtual ~ITextToSpeech() {};
 
-    virtual bool say( const std::string & text, const std::string & filename, const std::string & lang, std::string & error ) = 0;
+    ESpeakWrap();
 
-    virtual void set_param( const std::string & param, const std::string & val ) {};
+    virtual ~ESpeakWrap();
 
-    virtual void set_param( const std::string & param, int val ) {};
+    virtual bool say( const std::string & text, const std::string & filename, const std::string & lang, std::string & error );
 
-    virtual void set_param( const std::string & param, double val ) {};
+    virtual void set_param( const std::string & param, int val );
+
+private:
+
+    static const std::string & lang_to_voice( const std::string & lang );
+
+private:
+
+    espeak_cpp::ESpeakCpp       tts_;
 };
 
 } // namespace tts_connect
 
-#endif  // TTS_CONNECT_I_TEXT_TO_SPEECH_H
+#endif  // TTS_CONNECT_ESPEAK_WRAP_H

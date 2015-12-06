@@ -5,19 +5,29 @@
 
 void say( tts_connect::ITextToSpeech * tts, const std::string & name )
 {
-    std::string filename = "tts_" + name;
-
     std::string error;
 
-    std::string input = "Hello World";
-    std::string lang = "en";
+    std::map<std::string, std::string> texts =
+    {
+            { "en",     "hello world" },
+            { "de",     "hallo welt" },
+            { "ru",     "привет мир" },
+    };
 
-    bool b = tts->say( input, filename, lang, error );
+    for( auto & s : texts )
+    {
+        auto & lang = s.first;
 
-    if( b == false )
-        std::cout << "ERROR: cannot generate text using engine '" << name << "', " << error << std::endl;
-    else
-        std::cout << "OK: generated text OK using engine '" << name << "'" << std::endl;
+        std::string filename = "tts_" + name + "_" + lang + ".wav";
+
+        bool b = tts->say( s.second, filename, lang, error );
+
+        if( b == false )
+            std::cout << "ERROR: cannot generate text using engine '" << name << "', " << error << std::endl;
+        else
+            std::cout << "OK: generated text OK using engine '" << name << "', lang '" << lang << "'" << std::endl;
+
+    }
 }
 
 int main()
