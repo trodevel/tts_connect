@@ -19,9 +19,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2877 $ $Date:: 2015-12-02 #$ $Author: serge $
+// $Revision: 2912 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 #include "gspeak_wrap.h"        // self
+
+#include <map>                  // std::map
 
 #include "../gspeak/gspeak.h"   // GSpeak
 
@@ -32,11 +34,33 @@ GSpeakWrap::~GSpeakWrap()
 {
 }
 
-bool GSpeakWrap::say( const std::string & text, const std::string & filename, const std::string & lang, std::string & error )
+bool GSpeakWrap::say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error )
 {
     gspeak::GSpeak g;
 
-    return g.say( text, filename, lang, error );
+    const std::string & voice = lang_to_voice( lang );
+
+    return g.say( text, filename, voice, error );
+}
+
+
+const std::string & GSpeakWrap::lang_to_voice( lang_tools::lang_e lang )
+{
+    static const std::map<lang_tools::lang_e, std::string> lang_to_voice =
+    {
+            { lang_tools::lang_e::EN, "en" },
+            { lang_tools::lang_e::DE, "de" },
+            { lang_tools::lang_e::RU, "ru" }
+    };
+
+    auto it = lang_to_voice.find( lang );
+
+    if( it != lang_to_voice.end() )
+        return it->second;
+
+    static const std::string def("en");
+
+    return def;
 }
 
 } // namespace tts_connect

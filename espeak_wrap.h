@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2901 $ $Date:: 2015-12-06 #$ $Author: serge $
+// $Revision: 2912 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 #ifndef TTS_CONNECT_ESPEAK_WRAP_H
 #define TTS_CONNECT_ESPEAK_WRAP_H
@@ -39,13 +39,13 @@ public:
 
     virtual ~ESpeakWrap();
 
-    virtual bool say( const std::string & text, const std::string & filename, const std::string & lang, std::string & error );
+    virtual bool say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error );
 
     virtual void set_param( const std::string & param, int val );
 
 private:
 
-    static const std::string & lang_to_voice( const std::string & lang );
+    static const std::string & lang_to_voice( lang_tools::lang_e lang );
 
 private:
 

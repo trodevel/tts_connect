@@ -82,7 +82,7 @@ EXE=
 SRCC = tts_connect.cpp gspeak_wrap.cpp espeak_wrap.cpp
 OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCC))
 
-LIB_NAMES = espeak_cpp wave gspeak utils
+LIB_NAMES = espeak_cpp wave gspeak lang_tools utils
 LIBS = $(patsubst %,$(BINDIR)/lib%.a,$(LIB_NAMES))
 
 all: static
@@ -130,6 +130,10 @@ $(BINDIR)/libgspeak.a:
 $(BINDIR)/libespeak_cpp.a:
 	cd ../espeak_cpp; make; cd $(project)
 	ln -sf ../../espeak_cpp/$@ $(BINDIR)
+
+$(BINDIR)/liblang_tools.a:
+	cd ../lang_tools; make; cd $(project)
+	ln -sf ../../lang_tools/$@ $(BINDIR)
 
 $(BINDIR):
 	@ mkdir -p $(OBJDIR)

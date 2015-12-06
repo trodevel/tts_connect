@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2905 $ $Date:: 2015-12-06 #$ $Author: serge $
+// $Revision: 2912 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 #include "espeak_wrap.h"        // self
 
@@ -38,7 +38,7 @@ ESpeakWrap::~ESpeakWrap()
 {
 }
 
-bool ESpeakWrap::say( const std::string & text, const std::string & filename, const std::string & lang, std::string & error )
+bool ESpeakWrap::say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error )
 {
     const std::string & voice = lang_to_voice( lang );
 
@@ -51,13 +51,13 @@ void ESpeakWrap::set_param( const std::string & param, int val )
         tts_.set_gap_between_words( val );
 }
 
-const std::string & ESpeakWrap::lang_to_voice( const std::string & lang )
+const std::string & ESpeakWrap::lang_to_voice( lang_tools::lang_e lang )
 {
-    static const std::map<std::string, std::string> lang_to_voice =
+    static const std::map<lang_tools::lang_e, std::string> lang_to_voice =
     {
-            { "en", "mb-en1" },
-            { "de", "mb-de5" },
-            { "ru", "ru" }
+            { lang_tools::lang_e::EN, "mb-en1" },
+            { lang_tools::lang_e::DE, "mb-de5" },
+            { lang_tools::lang_e::RU, "ru" }
     };
 
     auto it = lang_to_voice.find( lang );

@@ -19,13 +19,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2900 $ $Date:: 2015-12-06 #$ $Author: serge $
+// $Revision: 2912 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 
 #ifndef TTS_CONNECT_I_TEXT_TO_SPEECH_H
 #define TTS_CONNECT_I_TEXT_TO_SPEECH_H
 
 #include <string>               // std::string
+
+#include "../lang_tools/language_enum.h"    // lang_e
 
 namespace tts_connect
 {
@@ -35,7 +37,7 @@ class ITextToSpeech
 public:
     virtual ~ITextToSpeech() {};
 
-    virtual bool say( const std::string & text, const std::string & filename, const std::string & lang, std::string & error ) = 0;
+    virtual bool say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error ) = 0;
 
     virtual void set_param( const std::string & param, const std::string & val ) {};
 
