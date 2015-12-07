@@ -1,6 +1,6 @@
 /*
 
-Wrapper over ESpeak
+Wrapper over Festvox
 
 Copyright (C) 2015 Sergey Kolevatov
 
@@ -19,48 +19,38 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2914 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2924 $ $Date:: 2015-12-07 #$ $Author: serge $
 
-#include "espeak_wrap.h"        // self
+#include "festvox_wrap.h"       // self
 
 #include <map>                  // std::map
 
-#include "../espeak_cpp/espeak_cpp.h"   // ESpeakCpp
+#include "../festvox/festvox.h" // Festvox
 
 namespace tts_connect
 {
 
-ESpeakWrap::ESpeakWrap()
+FestvoxWrap::~FestvoxWrap()
 {
 }
 
-ESpeakWrap::~ESpeakWrap()
+bool FestvoxWrap::say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error )
 {
-}
+    festvox::Festvox g;
 
-bool ESpeakWrap::say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error )
-{
     const std::string & voice = lang_to_voice( lang );
 
-    return tts_.say( text, filename, voice, error );
+    return g.say( text, filename, voice, error );
 }
 
-void ESpeakWrap::set_param( const std::string & param, int val )
-{
-    if( param == "gap_between_words" )
-        tts_.set_gap_between_words( val );
-}
 
-const std::string & ESpeakWrap::lang_to_voice( lang_tools::lang_e lang )
+const std::string & FestvoxWrap::lang_to_voice( lang_tools::lang_e lang )
 {
     static const std::map<lang_tools::lang_e, std::string> lang_to_voice =
     {
-            { lang_tools::lang_e::EN, "mb-en1" },
-            { lang_tools::lang_e::DE, "mb-de5" },
-            { lang_tools::lang_e::RU, "ru" },
-            { lang_tools::lang_e::FR, "fr" },
-            { lang_tools::lang_e::IT, "it" },
-            { lang_tools::lang_e::ES, "es" }
+            { lang_tools::lang_e::EN, "voice_don_diphone" },
+//            { lang_tools::lang_e::DE, "voice_german_de2_os" },
+            { lang_tools::lang_e::RU, "voice_msu_ru_nsh_clunits" },
     };
 
     auto it = lang_to_voice.find( lang );
@@ -68,7 +58,7 @@ const std::string & ESpeakWrap::lang_to_voice( lang_tools::lang_e lang )
     if( it != lang_to_voice.end() )
         return it->second;
 
-    static const std::string def("en");
+    static const std::string def;
 
     return def;
 }

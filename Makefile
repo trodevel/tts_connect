@@ -79,10 +79,10 @@ EXE=
 
 #vpath %.cpp .
 
-SRCC = tts_connect.cpp gspeak_wrap.cpp espeak_wrap.cpp
+SRCC = tts_connect.cpp gspeak_wrap.cpp espeak_wrap.cpp svox_wrap.cpp festvox_wrap.cpp
 OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCC))
 
-LIB_NAMES = espeak_cpp wave gspeak lang_tools utils
+LIB_NAMES = espeak_cpp wave gspeak lang_tools utils svox festvox
 LIBS = $(patsubst %,$(BINDIR)/lib%.a,$(LIB_NAMES))
 
 all: static
@@ -134,6 +134,14 @@ $(BINDIR)/libespeak_cpp.a:
 $(BINDIR)/liblang_tools.a:
 	cd ../lang_tools; make; cd $(project)
 	ln -sf ../../lang_tools/$@ $(BINDIR)
+
+$(BINDIR)/libsvox.a:
+	cd ../svox; make; cd $(project)
+	ln -sf ../../svox/$@ $(BINDIR)
+
+$(BINDIR)/libfestvox.a:
+	cd ../festvox; make; cd $(project)
+	ln -sf ../../festvox/$@ $(BINDIR)
 
 $(BINDIR):
 	@ mkdir -p $(OBJDIR)

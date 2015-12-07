@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2912 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2914 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 #include "gspeak_wrap.h"        // self
 
@@ -50,7 +50,10 @@ const std::string & GSpeakWrap::lang_to_voice( lang_tools::lang_e lang )
     {
             { lang_tools::lang_e::EN, "en" },
             { lang_tools::lang_e::DE, "de" },
-            { lang_tools::lang_e::RU, "ru" }
+            { lang_tools::lang_e::RU, "ru" },
+            { lang_tools::lang_e::FR, "fr" },
+            { lang_tools::lang_e::IT, "it" },
+            { lang_tools::lang_e::ES, "es" }
     };
 
     auto it = lang_to_voice.find( lang );

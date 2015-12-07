@@ -11,9 +11,12 @@ void say( tts_connect::ITextToSpeech * tts, const std::string & name )
 
     std::map<lang_tools::lang_e, std::string> texts =
     {
-            { lang_tools::lang_e::EN,     "hello world" },
-            { lang_tools::lang_e::DE,     "hallo welt" },
-            { lang_tools::lang_e::RU,     "привет мир" },
+            { lang_tools::lang_e::EN,   "hello world" },
+            { lang_tools::lang_e::DE,   "hallo welt" },
+            { lang_tools::lang_e::RU,   "привет мир" },
+            { lang_tools::lang_e::FR,   "Bonjour le monde" },
+            { lang_tools::lang_e::ES,   "Hola Mundo" },
+            { lang_tools::lang_e::IT,   "Ciao mondo" },
     };
 
     for( auto & s : texts )
@@ -36,7 +39,7 @@ void say( tts_connect::ITextToSpeech * tts, const std::string & name )
 
 int main()
 {
-    std::vector<std::string>    engines = { "gspeak", "espeak", "voicerss" };
+    std::vector<std::string>    engines = { "gspeak", "espeak", "voicerss", "svox", "festvox" };
 
     for( auto & n : engines )
     {

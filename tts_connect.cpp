@@ -19,13 +19,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2907 $ $Date:: 2015-12-06 #$ $Author: serge $
+// $Revision: 2925 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 
 #include "tts_connect.h"                // self
 
 #include "gspeak_wrap.h"                // GSpeakWrap
 #include "espeak_wrap.h"                // ESpeakWrap
+#include "svox_wrap.h"                  // SvoxWrap
+#include "festvox_wrap.h"               // FestvoxWrap
 
 using namespace tts_connect;
 
@@ -33,6 +35,8 @@ TtsConnect::TtsConnect()
 {
     engines_["gspeak"]  = new GSpeakWrap;
     engines_["espeak"]  = new ESpeakWrap;
+    engines_["svox"]    = new SvoxWrap;
+    engines_["festvox"] = new FestvoxWrap;
 }
 
 TtsConnect::~TtsConnect()
