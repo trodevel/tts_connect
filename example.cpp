@@ -39,7 +39,7 @@ void say( tts_connect::ITextToSpeech * tts, const std::string & name )
 
 int main()
 {
-    std::vector<std::string>    engines = { "gspeak", "espeak", "voicerss", "svox", "festvox" };
+    std::vector<std::string>    engines = { /*"gspeak",*/ "espeak", "voicerss", "svox", "festvox" };
 
     for( auto & n : engines )
     {

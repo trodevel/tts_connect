@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2914 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2931 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 #include "espeak_wrap.h"        // self
 
@@ -49,6 +49,8 @@ void ESpeakWrap::set_param( const std::string & param, int val )
 {
     if( param == "gap_between_words" )
         tts_.set_gap_between_words( val );
+    else if( param == "word_rate" )
+        tts_.set_word_rate( val );
 }
 
 const std::string & ESpeakWrap::lang_to_voice( lang_tools::lang_e lang )

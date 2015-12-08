@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2924 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2927 $ $Date:: 2015-12-07 #$ $Author: serge $
 
 #include "festvox_wrap.h"       // self
 
@@ -48,7 +48,8 @@ const std::string & FestvoxWrap::lang_to_voice( lang_tools::lang_e lang )
 {
     static const std::map<lang_tools::lang_e, std::string> lang_to_voice =
     {
-            { lang_tools::lang_e::EN, "voice_don_diphone" },
+//            { lang_tools::lang_e::EN, "voice_don_diphone" },
+            { lang_tools::lang_e::EN, "voice_kal_diphone" },
 //            { lang_tools::lang_e::DE, "voice_german_de2_os" },
             { lang_tools::lang_e::RU, "voice_msu_ru_nsh_clunits" },
     };

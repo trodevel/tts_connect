@@ -10,3 +10,7 @@ own:
 
 - utils (HTTPDownloader)
 - lang_tools (to_string)
+
+* required packages
+
+- mbrola-en1 mbrola-de5 (for EspeakWrap)
