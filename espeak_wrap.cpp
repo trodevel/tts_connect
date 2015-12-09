@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2931 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2948 $ $Date:: 2015-12-08 #$ $Author: serge $
 
 #include "espeak_wrap.h"        // self
 
@@ -41,6 +41,12 @@ ESpeakWrap::~ESpeakWrap()
 bool ESpeakWrap::say( const std::string & text, const std::string & filename, lang_tools::lang_e lang, std::string & error )
 {
     const std::string & voice = lang_to_voice( lang );
+
+    if( voice.empty() )
+    {
+        error = "unsupported language";
+        return false;
+    }
 
     return tts_.say( text, filename, voice, error );
 }
@@ -70,7 +76,7 @@ const std::string & ESpeakWrap::lang_to_voice( lang_tools::lang_e lang )
     if( it != lang_to_voice.end() )
         return it->second;
 
-    static const std::string def("en");
+    static const std::string def;
 
     return def;
 }

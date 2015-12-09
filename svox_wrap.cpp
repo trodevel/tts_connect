@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2923 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2948 $ $Date:: 2015-12-08 #$ $Author: serge $
 
 #include "svox_wrap.h"          // self
 
@@ -39,6 +39,12 @@ bool SvoxWrap::say( const std::string & text, const std::string & filename, lang
     svox::Svox g;
 
     const std::string & voice = lang_to_voice( lang );
+
+    if( voice.empty() )
+    {
+        error = "unsupported language";
+        return false;
+    }
 
     return g.say( text, filename, voice, error );
 }

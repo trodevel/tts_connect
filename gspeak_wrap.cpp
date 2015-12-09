@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 2914 $ $Date:: 2015-12-07 #$ $Author: serge $
+// $Revision: 2948 $ $Date:: 2015-12-08 #$ $Author: serge $
 
 #include "gspeak_wrap.h"        // self
 
@@ -39,6 +39,12 @@ bool GSpeakWrap::say( const std::string & text, const std::string & filename, la
     gspeak::GSpeak g;
 
     const std::string & voice = lang_to_voice( lang );
+
+    if( voice.empty() )
+    {
+        error = "unsupported language";
+        return false;
+    }
 
     return g.say( text, filename, voice, error );
 }
@@ -61,7 +67,7 @@ const std::string & GSpeakWrap::lang_to_voice( lang_tools::lang_e lang )
     if( it != lang_to_voice.end() )
         return it->second;
 
-    static const std::string def("en");
+    static const std::string def;
 
     return def;
 }
